@@ -184,14 +184,12 @@
 
     <header class="head panel">
       <h1>Campus Café</h1>
-      <p class="muted">Quote Dashboard • Chapter 8 JavaScript + 12-column CSS Grid</p>
 
       <!-- Add a banner image here. -->
       <img
         src="coffee.jpg"
         alt="Coffee on a table"
       />
-      <p class="muted">Banner photo: Unsplash (replace with your own + attribution if required).</p>
     </header>
 
     <nav class="nav panel">
@@ -206,7 +204,6 @@
     <main class="content panel">
       <section id="menu">
         <h2>Menu</h2>
-        <p class="muted">Display cards only. Inputs are collected using dialogs.</p>
 
         <div class="menu-grid">
           <!-- Add 3 <article> cards here (Coffee, Sandwich, Salad). -->
@@ -227,7 +224,6 @@
 
       <section id="quote" style="margin-top:18px;">
         <h2>Get a Quote</h2>
-        <p class="muted">Click Get Quote and enter values in dialogs.</p>
 
         <div class="actions">
           <button id="calcBtn" type="button">Get Quote</button>
@@ -253,15 +249,15 @@
 	<!-- Add the weather display box here:
      	Create a div with id="weatherBox" and class="weather".
      	Set its starting text to: Loading weather... -->
-        <div id="weatherBox class=weather">
+        <div id="weatherBox" class="weather">
             Loading weather...
         </div>
     </aside>
 
     <footer class="footer panel">
       <p>&copy; 2026 Campus Café</p>
-      <p class="muted">Weather data by Open-Meteo (CC BY 4.0).</p>
-      <p class="muted">Banner photo attribution goes here (if required).</p>
+      <p>Weather data by Open-Meteo (CC BY 4.0).</p>
+      <p>Banner photo attribution goes here (if required).</p>
     </footer>
 
   </div>
@@ -332,11 +328,19 @@
       // return { unitPrice, subtotal, studentDiscount, ecoFee, bulkDiscount, tax, total };
 
       const subtotal = unitPrice * qty;
-      if (type === "coffee" && ecoCup) {
-        subtotal += ECO_FEE;
-      }
 
-      const studentDiscount = 0.1 * subtotal;
+      const studentDiscount = isStudent ? (subtotal * 0.1) : 0;
+
+      const ecoFee = (type === "coffee" && ecoCup) ? ECO_FEE : 0;
+
+      const bulkDiscount = (qty > BULK_QTY) ? BULK_OFF : 0;
+
+      const taxable_amount = subtotal - studentDiscount + ecoFee - bulkDiscount;
+      const tax = taxable_amount * 0.05;
+
+      const total = tax + taxable_amount;
+
+      return {unitPrice, subtotal, studentDiscount, ecoFee, bulkDiscount, tax, total};
     }
 
     function buildReceipt(type, qty, isStudent, ecoCup, calc){
@@ -369,7 +373,8 @@ TOTAL:          ${money(calc.total)}
 
     /* Complete: reset #display to "No order data." */
     function resetUI(){
-
+      const displayElement = document.getElementById("display");
+      displayElement.textContent = "No order data";
     }
 
     async function loadWeather(){
@@ -389,10 +394,6 @@ TOTAL:          ${money(calc.total)}
       } catch {
         box.textContent = "Weather unavailable.";
       }
-    }
-
-    function isAlpha(str) {
-      return /^[A-Za-z]+$/.test(str);
     }
 
     function main(){
