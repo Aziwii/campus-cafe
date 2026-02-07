@@ -13,12 +13,12 @@
 
     :root{
       /* Complete the color palette (change values only) */
-      --bg:#F2E3BB;
-      --panel:#C0B87A;
-      --text:#005F02;
+      --bg:#FFFBE9;
+      --panel:#AD8B73;
+      --text:#252A34;
       --muted:#C0B87A;
-      --border:#427A43;
-      --accent:#F2E3BB;
+      --border:#E3CAA5;
+      --accent:#E3CAA5;
       --radius: 16px;
     }
 
@@ -29,6 +29,7 @@
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
+      
     }
 
     a{ color: var(--accent); }
@@ -101,7 +102,6 @@
       height: 220px;
       object-fit: cover;
       border-radius: 12px;
-      border: 1px solid var(--border);
       display: block;
       margin-top: 10px;
     }
@@ -114,8 +114,17 @@
       grid-template-columns: repeat(3, 1fr);
     }
 
+    @media (max-width: 768px){
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
     /* Complete breakpoint for menu cards (desktop: 3 columns) */
     @media (min-width: 900px){
+      .menu-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
 
     article{
@@ -273,9 +282,17 @@
       return `$${n.toFixed(2)}`;
     }
 
-    /* Complete: return trimmed + lowercase string; handle cancel/empty safely; if raw is null, it should return an empty string to avoid errors on .trim() */
+    /* Complete: return trimmed + lowercase string; handle cancel/empty safely;
+     if raw is null, it should return an empty string to avoid errors on .trim() */
     function normalizeType(raw){
+      if(raw === null){
+        raw = "";
+      }
+      
+      const result = raw.trim().toLowerCase();
 
+      console.log(result);
+      return result;
     }
 
     /* Complete: return true only for coffee, sandwich, salad */
@@ -284,10 +301,6 @@
         return true;
       }
       return false;
-    }
-
-    function money(n) {
-      return `$${n.toFixed(2)}`
     }
 
     /* Complete: use a for loop to repeat an icon up to 10 times */
@@ -317,6 +330,13 @@
       // return an object with all values
 
       // return { unitPrice, subtotal, studentDiscount, ecoFee, bulkDiscount, tax, total };
+
+      const subtotal = unitPrice * qty;
+      if (type === "coffee" && ecoCup) {
+        subtotal += ECO_FEE;
+      }
+
+      const studentDiscount = 0.1 * subtotal;
     }
 
     function buildReceipt(type, qty, isStudent, ecoCup, calc){
@@ -349,6 +369,7 @@ TOTAL:          ${money(calc.total)}
 
     /* Complete: reset #display to "No order data." */
     function resetUI(){
+
     }
 
     async function loadWeather(){
