@@ -13,12 +13,12 @@
 
     :root{
       /* Complete the color palette (change values only) */
-      --bg:"#F2E3BB";
-      --panel:"#C0B87A";
-      --text:"#F2E3BB";
-      --muted:"#C0B87A";
-      --border:"#427A43";
-      --accent:"#005F02";
+      --bg:#F2E3BB;
+      --panel:#C0B87A;
+      --text:#005F02;
+      --muted:#C0B87A;
+      --border:#427A43;
+      --accent:#F2E3BB;
       --radius: 16px;
     }
 
@@ -38,15 +38,15 @@
       margin: 0 auto;
       padding: 16px;
       display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      gap: 16px;
+      grid-template-columns: repeat(12,[col-start] 1fr);
+      gap: 10px;
     }
 
     .panel{
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 16px;
+      padding: 10px;
     }
 
     /* Mobile-first: stacked full width */
@@ -65,7 +65,35 @@
 	 Can explicitly set .sidebar { grid-row: 2; } and .ads { grid-row: 3; } (or similar  depending on their header span) to ensure they stack vertically in the right-hand column
       */
 
+      .head {
+        grid-column: 1 / -1;
+        grid-row: 1;
+      }
 
+      .nav {
+        grid-column: 1 / 3;
+        grid-row: 2 / 4;
+      }
+
+      .content {
+        grid-column:  3 / span 8;
+        grid-row: 2 / 4;
+
+      }
+
+      .sidebar {
+        grid-column:  11 / -1;
+        grid-row: 2;
+      }
+
+      .ads {
+        grid-column:  11 / -1;
+        grid-row: 3;
+      }
+
+      .footer {
+        grid-column: 1 / -1;
+      }
     }
 
     .head img{
@@ -82,6 +110,8 @@
 
     /* Complete nested menu grid here (mobile: 1 column) */
     .menu-grid{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
     }
 
     /* Complete breakpoint for menu cards (desktop: 3 columns) */
@@ -92,7 +122,8 @@
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 12px;
-      background: #fff;
+      margin: 12px;
+      background: var(--accent);
     }
 
     .price{ font-weight: 900; color: var(--accent); }
@@ -148,7 +179,7 @@
 
       <!-- Add a banner image here. -->
       <img
-        src=""
+        src="coffee.jpg"
         alt="Coffee on a table"
       />
       <p class="muted">Banner photo: Unsplash (replace with your own + attribution if required).</p>
@@ -170,6 +201,18 @@
 
         <div class="menu-grid">
           <!-- Add 3 <article> cards here (Coffee, Sandwich, Salad). -->
+            <article class="card">
+               <h2>Coffee</h2>
+               <div class="meta">Get yourself hyped up</div>
+            </article>
+            <article class="card">
+               <h2>Sandwich</h2>
+               <div class="meta">Hearty and filling</div>
+            </article>
+            <article class="card">
+               <h2>Salad</h2>
+               <div class="meta">Vegetarian alternative to the sandwich</div>
+            </article>
         </div>
       </section>
 
@@ -184,7 +227,10 @@
       </section>
 
       <!-- Add the About section here (2–4 sentences). Create with the appropriate ID to ensure the navigation link <a href="#about"> actually works -->
-
+        <p id="about">
+            Our coffee shop provides you with the fuel that you need to keep you going throughout the day.
+            We also have tons of room for you to sit down and recharge yourself, or your device battery. 
+        </p>
     </main>
 
     <aside class="sidebar panel">
@@ -198,6 +244,9 @@
 	<!-- Add the weather display box here:
      	Create a div with id="weatherBox" and class="weather".
      	Set its starting text to: Loading weather... -->
+        <div id="weatherBox class=weather">
+            Loading weather...
+        </div>
     </aside>
 
     <footer class="footer panel">
@@ -226,10 +275,19 @@
 
     /* Complete: return trimmed + lowercase string; handle cancel/empty safely; if raw is null, it should return an empty string to avoid errors on .trim() */
     function normalizeType(raw){
+
     }
 
     /* Complete: return true only for coffee, sandwich, salad */
     function isValidType(t){
+      if (t === "coffee" || t === "sandwich" || t === "salad") {
+        return true;
+      }
+      return false;
+    }
+
+    function money(n) {
+      return `$${n.toFixed(2)}`
     }
 
     /* Complete: use a for loop to repeat an icon up to 10 times */
@@ -240,6 +298,10 @@
       let line = "";
       //write the FOR loop that repeats icon cap times
       // for (...) { line += icon; }
+
+      for (let i = 0; i < cap; i ++){
+        line += icon;
+      }
       return line;
     }
 
@@ -282,6 +344,7 @@ TOTAL:          ${money(calc.total)}
 
     /* Complete: show a clear error in #display */
     function showError(msg){
+      alert("Error: " + msg);
     }
 
     /* Complete: reset #display to "No order data." */
@@ -307,6 +370,10 @@ TOTAL:          ${money(calc.total)}
       }
     }
 
+    function isAlpha(str) {
+      return /^[A-Za-z]+$/.test(str);
+    }
+
     function main(){
       loadWeather();
       resetUI();
@@ -325,10 +392,17 @@ TOTAL:          ${money(calc.total)}
            - must be between 1 and 10
            - if invalid: showError(...) and stop
         */
+       if ((typeof qty !== 'number') || 0 > qty || qty > 10){
+        showError("Item quantity must be a number!");
+        return;
+       }
+
 
         /* Add a confirm dialog here for student discount:
            Store the result in a variable named isStudent.
         */
+
+        const isStudent = true;
 
         const ecoCup = (type === "coffee") ? confirm("Add reusable cup? (+$1.00)") : false;
 
