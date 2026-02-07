@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,39 +12,43 @@
        Focus: CSS Grid + Chapter 8 JavaScript
        ========================================================= */
 
-    :root{
+    :root {
       /* Complete the color palette (change values only) */
-      --bg:#FFFBE9;
-      --panel:#AD8B73;
-      --text:#252A34;
-      --muted:#C0B87A;
-      --border:#E3CAA5;
-      --accent:#E3CAA5;
+      --bg: #FFFBE9;
+      --panel: #AD8B73;
+      --text: #252A34;
+      --muted: #C0B87A;
+      --border: #E3CAA5;
+      --accent: #E3CAA5;
       --radius: 16px;
     }
 
-    *{ box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
-    body{
+    body {
       margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background: var(--bg);
       color: var(--text);
-      
+
     }
 
-    a{ color: var(--accent); }
+    a {
+      color: var(--accent);
+    }
 
-    .container{
+    .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 16px;
       display: grid;
-      grid-template-columns: repeat(12,[col-start] 1fr);
+      grid-template-columns: repeat(12, [col-start] 1fr);
       gap: 10px;
     }
 
-    .panel{
+    .panel {
       background: var(--panel);
       border: 1px solid var(--border);
       border-radius: var(--radius);
@@ -51,10 +56,12 @@
     }
 
     /* Mobile-first: stacked full width */
-    .container > *{ grid-column: 1 / -1; }
+    .container>* {
+      grid-column: 1 / -1;
+    }
 
     /* Complete desktop grid placement here */
-    @media (min-width: 768px){
+    @media (min-width: 768px) {
       /* Required layout:
          .head spans 12
          .nav spans 2 (left)
@@ -77,18 +84,18 @@
       }
 
       .content {
-        grid-column:  3 / span 8;
+        grid-column: 3 / span 8;
         grid-row: 2 / 4;
 
       }
 
       .sidebar {
-        grid-column:  11 / -1;
+        grid-column: 11 / -1;
         grid-row: 2;
       }
 
       .ads {
-        grid-column:  11 / -1;
+        grid-column: 11 / -1;
         grid-row: 3;
       }
 
@@ -97,7 +104,7 @@
       }
     }
 
-    .head img{
+    .head img {
       width: 100%;
       height: 220px;
       object-fit: cover;
@@ -106,28 +113,30 @@
       margin-top: 10px;
     }
 
-    .muted{ color: var(--muted); }
+    .muted {
+      color: var(--muted);
+    }
 
     /* Complete nested menu grid here (mobile: 1 column) */
-    .menu-grid{
+    .menu-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
     }
 
-    @media (max-width: 768px){
+    @media (max-width: 768px) {
       .menu-grid {
         grid-template-columns: 1fr;
       }
     }
 
     /* Complete breakpoint for menu cards (desktop: 3 columns) */
-    @media (min-width: 900px){
+    @media (min-width: 900px) {
       .menu-grid {
         grid-template-columns: repeat(3, 1fr);
       }
     }
 
-    article{
+    article {
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 12px;
@@ -135,16 +144,19 @@
       background: var(--accent);
     }
 
-    .price{ font-weight: 900; color: var(--accent); }
+    .price {
+      font-weight: 900;
+      color: var(--accent);
+    }
 
-    .actions{
+    .actions {
       margin-top: 12px;
       display: flex;
       gap: 10px;
       flex-wrap: wrap;
     }
 
-    button{
+    button {
       border: 1px solid var(--border);
       border-radius: 12px;
       padding: 10px 12px;
@@ -153,25 +165,25 @@
       background: #fff;
     }
 
-    #calcBtn{
+    #calcBtn {
       background: var(--accent);
       color: #fff;
-      border-color: rgba(0,0,0,0.2);
+      border-color: rgba(0, 0, 0, 0.2);
     }
 
-    pre{
+    pre {
       white-space: pre-wrap;
-      background: rgba(15,23,42,0.03);
-      border: 1px dashed rgba(15,23,42,0.15);
+      background: rgba(15, 23, 42, 0.03);
+      border: 1px dashed rgba(15, 23, 42, 0.15);
       padding: 12px;
       border-radius: 12px;
       margin: 10px 0 0 0;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
     }
 
-    .weather{
-      background: rgba(22,163,74,0.08);
-      border: 1px solid rgba(22,163,74,0.18);
+    .weather {
+      background: rgba(22, 163, 74, 0.08);
+      border: 1px solid rgba(22, 163, 74, 0.18);
       border-radius: 12px;
       padding: 12px;
       margin-top: 8px;
@@ -186,10 +198,7 @@
       <h1>Campus Café</h1>
 
       <!-- Add a banner image here. -->
-      <img
-        src="coffee.jpg"
-        alt="Coffee on a table"
-      />
+      <img src="coffee.jpg" alt="Coffee on a table" />
     </header>
 
     <nav class="nav panel">
@@ -207,18 +216,19 @@
 
         <div class="menu-grid">
           <!-- Add 3 <article> cards here (Coffee, Sandwich, Salad). -->
-            <article class="card">
-               <h2>Coffee</h2>
-               <div class="meta">Get yourself hyped up</div>
-            </article>
-            <article class="card">
-               <h2>Sandwich</h2>
-               <div class="meta">Hearty and filling</div>
-            </article>
-            <article class="card">
-               <h2>Salad</h2>
-               <div class="meta">Vegetarian alternative to the sandwich</div>
-            </article>
+          <article class="card">
+            <h2>Coffee: $3.25</h2>
+            <div class="meta">Standard black americano</div>
+
+          </article>
+          <article class="card">
+            <h2>Sandwich: $8.50</h2>
+            <div class="meta">Turkey club sandwich on whole wheat</div>
+          </article>
+          <article class="card">
+            <h2>Salad: $7.25</h2>
+            <div class="meta">Lettuce and spinich with assorted nuts and seeds</div>
+          </article>
         </div>
       </section>
 
@@ -232,10 +242,13 @@
       </section>
 
       <!-- Add the About section here (2–4 sentences). Create with the appropriate ID to ensure the navigation link <a href="#about"> actually works -->
-        <p id="about">
-            Our coffee shop provides you with the fuel that you need to keep you going throughout the day.
-            We also have tons of room for you to sit down and recharge yourself, or your device battery. 
+      <section id="about">
+        <p>
+          Our coffee shop website provides you with the ability to order an amount of items from the menu.
+          After doing so you will be asked if you are a student and then furthermore if you were to have ordered a
+          coffee you have the option to get a resuable cup for an added cost.
         </p>
+      </section>
     </main>
 
     <aside class="sidebar panel">
@@ -245,13 +258,13 @@
 
     <aside class="ads panel">
       <h3>Local Weather</h3>
-      
-	<!-- Add the weather display box here:
+
+      <!-- Add the weather display box here:
      	Create a div with id="weatherBox" and class="weather".
      	Set its starting text to: Loading weather... -->
-        <div id="weatherBox" class="weather">
-            Loading weather...
-        </div>
+      <div id="weatherBox" class="weather">
+        Loading weather...
+      </div>
     </aside>
 
     <footer class="footer panel">
@@ -261,7 +274,7 @@
     </footer>
 
   </div>
-<script>
+  <script>
     /* =========================================================
        JavaScript (Chapter 8)
        Complete the marked functions and the Get Quote logic.
@@ -274,17 +287,17 @@
     const BULK_QTY = 6;
     const BULK_OFF = 2.00;
 
-    function money(n){
+    function money(n) {
       return `$${n.toFixed(2)}`;
     }
 
     /* Complete: return trimmed + lowercase string; handle cancel/empty safely;
      if raw is null, it should return an empty string to avoid errors on .trim() */
-    function normalizeType(raw){
-      if(raw === null){
+    function normalizeType(raw) {
+      if (raw === null) {
         raw = "";
       }
-      
+
       const result = raw.trim().toLowerCase();
 
       console.log(result);
@@ -292,7 +305,7 @@
     }
 
     /* Complete: return true only for coffee, sandwich, salad */
-    function isValidType(t){
+    function isValidType(t) {
       if (t === "coffee" || t === "sandwich" || t === "salad") {
         return true;
       }
@@ -300,7 +313,7 @@
     }
 
     /* Complete: use a for loop to repeat an icon up to 10 times */
-    function iconsFor(type, qty){
+    function iconsFor(type, qty) {
       const map = { coffee: "☕", sandwich: "🥪", salad: "🥗" };
       const icon = map[type] || "✅";
       const cap = Math.min(qty, 10);
@@ -308,14 +321,14 @@
       //write the FOR loop that repeats icon cap times
       // for (...) { line += icon; }
 
-      for (let i = 0; i < cap; i ++){
+      for (let i = 0; i < cap; i++) {
         line += icon;
       }
       return line;
     }
 
     /* Complete: implement full math rules; unitPrice line is provided */
-    function processQuote(type, qty, isStudent, ecoCup){
+    function processQuote(type, qty, isStudent, ecoCup) {
       const unitPrice = PRICES[type];
       // compute subtotal
       // compute studentDiscount (10% of subtotal if isStudent)
@@ -340,10 +353,10 @@
 
       const total = tax + taxable_amount;
 
-      return {unitPrice, subtotal, studentDiscount, ecoFee, bulkDiscount, tax, total};
+      return { unitPrice, subtotal, studentDiscount, ecoFee, bulkDiscount, tax, total };
     }
 
-    function buildReceipt(type, qty, isStudent, ecoCup, calc){
+    function buildReceipt(type, qty, isStudent, ecoCup, calc) {
       const icons = iconsFor(type, qty);
       const studentText = isStudent ? "Yes" : "No";
       const ecoText = (type === "coffee") ? (ecoCup ? "Yes" : "No") : "N/A";
@@ -367,17 +380,20 @@ TOTAL:          ${money(calc.total)}
     }
 
     /* Complete: show a clear error in #display */
-    function showError(msg){
-      alert("Error: " + msg);
+    function showError(msg) {
+      const displayElement = document.getElementById("display");
+      displayElement.textContent = "Please enter the correct information to get the receipt";
+
+      // displayElement.style.fontWeight = "bold";
     }
 
     /* Complete: reset #display to "No order data." */
-    function resetUI(){
+    function resetUI() {
       const displayElement = document.getElementById("display");
       displayElement.textContent = "No order data";
     }
 
-    async function loadWeather(){
+    async function loadWeather() {
       const box = document.getElementById("weatherBox");
       const url =
         "https://api.open-meteo.com/v1/forecast" +
@@ -396,7 +412,7 @@ TOTAL:          ${money(calc.total)}
       }
     }
 
-    function main(){
+    function main() {
       loadWeather();
       resetUI();
 
@@ -404,7 +420,7 @@ TOTAL:          ${money(calc.total)}
         const type = normalizeType(prompt("Enter item type: coffee / sandwich / salad"));
         const qty = Number(prompt("Enter quantity (1–10):"));
 
-        if (!isValidType(type)){
+        if (!isValidType(type)) {
           showError("Item must be coffee, sandwich, or salad.");
           return;
         }
@@ -414,17 +430,17 @@ TOTAL:          ${money(calc.total)}
            - must be between 1 and 10
            - if invalid: showError(...) and stop
         */
-       if ((typeof qty !== 'number') || 0 > qty || qty > 10){
-        showError("Item quantity must be a number!");
-        return;
-       }
+        if ((typeof qty !== 'number') || 0 > qty || qty > 10) {
+          showError("Item quantity must be a number!");
+          return;
+        }
 
 
         /* Add a confirm dialog here for student discount:
            Store the result in a variable named isStudent.
         */
 
-        const isStudent = true;
+        const isStudent = confirm("Are you a student");
 
         const ecoCup = (type === "coffee") ? confirm("Add reusable cup? (+$1.00)") : false;
 
@@ -441,4 +457,5 @@ TOTAL:          ${money(calc.total)}
     main();
   </script>
 </body>
+
 </html>
